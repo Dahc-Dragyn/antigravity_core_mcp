@@ -1,6 +1,6 @@
 # ⚡ Antigravity Core MCP Server
 
-### *The Unified, High-Performance Developer Tool suite for AI Agents & Coders*
+### *The Unified, High-Performance Developer Tool suite for  RUST AI Agents & Coders*
 
 Welcome! If you are a developer, an AI engineer, or just someone looking to give your AI assistants super-powers, you've come to the right place. 
 
@@ -19,7 +19,7 @@ If you've ever used an AI assistant like Claude or ChatGPT, you know they are in
 
 ---
 
-## 🌟 The 4-in-1 Power Suite
+## 🌟 The 4-in-1 Power Suite for RUST code
 
 Instead of running four separate, heavy, sluggish applications, **Antigravity Core** consolidates everything into a single, microscopic **~8.3 MB** executable. You simply run it with a flag telling it which server to become:
 
