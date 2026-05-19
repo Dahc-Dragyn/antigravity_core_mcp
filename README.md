@@ -72,12 +72,53 @@ We have made this server incredibly simple to install whether you are a complete
 
 ---
 
-## 🛠️ Claude Desktop Configuration
+## 🛠️ Configuration for AI Clients & IDEs
 
-Paste the following configuration into your `%appdata%\Claude\claude_desktop_config.json` file. Make sure to replace `C:\\path\\to\\bin\\antigravity_core_mcp.exe` with the exact path where your compiled or downloaded executable is saved!
+Antigravity Core MCP runs flawlessly across all standard Model Context Protocol clients. Below are configuration instructions for **Antigravity**, **Claude Desktop**, **Cursor**, and **Windsurf**.
 
 > [!IMPORTANT]
-> Because Windows JSON paths require double backslashes, make sure your path is written like: `C:\\MCP\\antigravity_core_mcp.exe`.
+> Because JSON and CLI configs on Windows require proper path handling, always make sure to use double backslashes (`\\`) in JSON configs (e.g., `C:\\MCP\\antigravity_core_mcp.exe`) and double quotes around paths with spaces.
+
+---
+
+### 1. 🪐 Antigravity (Agent Environment)
+The Antigravity agent uses a central `mcp_config.json` to manage active tools.
+* **Path**: `C:\Users\<Your-Username>\.gemini\antigravity\mcp_config.json`
+* **Configuration**: Add the following server entries to your `mcpServers` object:
+
+```json
+{
+  "mcpServers": {
+    "firecrawl_rust": {
+      "command": "C:\\path\\to\\bin\\antigravity_core_mcp.exe",
+      "args": ["--server", "firecrawl"],
+      "env": {
+        "FIRECRAWL_API_URL": "http://localhost:3002",
+        "FIRECRAWL_API_KEY": "local_development"
+      }
+    },
+    "crates_advisor": {
+      "command": "C:\\path\\to\\bin\\antigravity_core_mcp.exe",
+      "args": ["--server", "crates"]
+    },
+    "borrow_explainer": {
+      "command": "C:\\path\\to\\bin\\antigravity_core_mcp.exe",
+      "args": ["--server", "borrow"]
+    },
+    "rust_appliance": {
+      "command": "C:\\path\\to\\bin\\antigravity_core_mcp.exe",
+      "args": ["--server", "appliance"]
+    }
+  }
+}
+```
+
+---
+
+### 2. 🦺 Claude Desktop
+Claude Desktop uses a global JSON file to automatically register MCP servers on startup.
+* **Path**: `%appdata%\Claude\claude_desktop_config.json`
+* **Configuration**: Paste the identical JSON snippet under your `"mcpServers"` key:
 
 ```json
 {
@@ -101,6 +142,29 @@ Paste the following configuration into your `%appdata%\Claude\claude_desktop_con
   }
 }
 ```
+
+---
+
+### 3. 🎯 Cursor IDE
+Cursor supports native custom MCP servers. To configure them:
+1. Open Cursor and navigate to **Cursor Settings** -> **Features** -> **MCP**.
+2. Click **+ Add New MCP Server**.
+3. Create an entry for each mode you wish to use:
+   * **Name**: `antigravity-appliance` (or another mode)
+   * **Type**: `command`
+   * **Command**: `C:\path\to\bin\antigravity_core_mcp.exe --server appliance`
+4. Click **Save**. The status indicator will turn green if the connection is established.
+
+---
+
+### 4. 🌊 Windsurf IDE
+Windsurf supports MCP out of the box via its standard config.
+1. Open Windsurf and go to **Settings** -> **MCP**.
+2. Click **Add Server** or manually edit the global Windsurf configuration file located at `~/.codeium/windsurf/mcp_config.json`.
+3. Add the command line server definition:
+   * **Command**: `C:\path\to\bin\antigravity_core_mcp.exe`
+   * **Arguments**: `["--server", "crates"]`
+
 
 ---
 
